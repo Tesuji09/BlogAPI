@@ -1,0 +1,22 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "description": "Blog API",
+  "main": "index.js",
+  "scripts": {
+    "test": "console.log('cats)"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tesuji09/BlogAPI.git"
+  },
+  "author": "Joshua Zuo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tesuji09/BlogAPI/issues"
+  },
+  "homepage": "https://github.com/Tesuji09/BlogAPI#readme",
+  "dependencies": {
+    "uuid": "^3.2.1"
+  }
+}
