@@ -18,7 +18,7 @@ describe('Blog', function() {
     return chai.request(app)
     .get('/blog-posts')
     .then(function(res) {
-      expect(ers).to.have.status(200);
+      expect(res).to.have.status(200);
       expect(res).to.be.json;
       expect(res.body).to.be.a('array');
       const expectedKeys = ['content', 'id', 'author', 'publishDate', 'title'];

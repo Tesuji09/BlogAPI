@@ -1,2 +1,9 @@
 language: node_js
 node_js: node
+deploy:
+  provider: heroku
+  api_key:
+    secure: c5dsZR+BcJklOZ5Xr9C9nyunRwcf/8T4M2E8GB6msWinrc997epk9iKi/bhB+65X4kQptV6jtTifylGtjTQFnaYfqW04ozspEedaPv5rBZuomLSQM5BSzjCDjw0hQpC9GQSrhxfjBBck6nmVQmDXoRpsNGOThBagT2M6qzMTjHeYGXxLdVGv665iCpx/4ssVygcyApaLpwmWHBqouMudJg/HuQb5v/16jSc9svHTSCdqzhdxFLBI7PULK2b3jzCL47b9s4qw+YiXSGt3DWDgEjdUZF9NwRsW+2bIPy4g4bYo8wu2BOVYDsVXjCmpXniOy7OMglQ7INCg0BpQ3GbUxp9FrVbwldT8kEaUhchfTDYK/mRjuspj6bmx+T5pBqy/HkG+1VjcPPstNqcHb3qUKXL8BnuZ3PTcJy+7CYN5XUrOZGww3Zv1GgpFjRdQjzlUzrduiteQO+TccLzsQ1ZcD9T3yLefMaTrw6uzR81YH8KzdnOzoC7mLd8oCwA1HlS1MdoSPZZX5IyMr6KFveq7RlQyc2XCE7+VTrqzSJxepOrT1EbNDWy+sW87siKBY3khcq4R/lWYQT3OyXeGwUyAPcRhlmaOtnio/9Lfuz2O4Q/nFoqqLDggbTgSYkF+Hbh4zKoYkdL5QhmKeee4RHg4tcvwSP5TUmrJPPGDYwY1BjY=
+  app: fathomless-river-69632
+  on:
+    repo: Tesuji09/BlogAPI
