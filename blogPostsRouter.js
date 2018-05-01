@@ -28,7 +28,7 @@ router.post('/',jsonParser, (req, res) => {
       return res.status(400).send(`Missing "${field}" in request body`)
     }
   }
-  const item = BlogPosts.create(req.body.title, req.body.content, req.body.autor, req.body.publishDate)
+  const item = BlogPosts.create(req.body.title, req.body.content, req.body.author, req.body.publishDate)
   res.status(201).json(item)
 });
 
@@ -63,7 +63,7 @@ router.put('/:id', jsonParser, (req, res) => {
     author: req.body.author,
     publishDate: req.body.publishDate || Date.now()
   })
-  res.status(204).end();
+  res.status(204).json(updatedItem);
 })
 
 module.exports = router;
