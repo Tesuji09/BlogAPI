@@ -4,7 +4,7 @@
   "description": "Blog API",
   "main": "index.js",
   "scripts": {
-    "test": "console.log('cats)"
+    "test": "mocha --exit"
   },
   "repository": {
     "type": "git",
