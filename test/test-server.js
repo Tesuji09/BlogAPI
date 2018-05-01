@@ -28,4 +28,18 @@ describe('Blog', function() {
       });
     });
   });
+  it('create a new blog post on POST', function() {
+    const newBlog = {
+      title: "The third best Blog Post",
+      author: "Joshua Zuo",
+      content: "I kinda sorta like posting blogs",
+      publishDate: "September 11, 2009"
+    }
+    return chai.request(app)
+    .post('/blog-posts')
+    .send(newBlog)
+    .then(function(res) => {
+      expect(res).to.have.status(200)
+    })
+  });
 });
