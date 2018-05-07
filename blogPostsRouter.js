@@ -4,19 +4,37 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 
-const {BlogPosts} = require('./models');
+const blogPosts = require('./models');
 
 
 
 // title, content, author, publishDate
-BlogPosts.create('The Best blog post', 'I really like making blog posts', 'Joshua Zuo', 'September 9, 2009')
-BlogPosts.create('The Second Best Blog Post', 'I kind of like making blog posts', 'Joshua Zuo', 'September 10, 2009')
 
 
 
 router.get('/', (req, res) => {
-  res.json(BlogPosts.get());
-})
+  blogPosts
+    .find()
+    .then(blogs => {
+      return {
+        blogs: blogs.map(blog => {blog.serialize})
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({message: "Internal server error"})
+    });
+});
+
+router.get('/:id', (req, res) => {
+  blogPosts
+    .findById(req.params.id)
+    .then(blog => {res.json(blog.serialize)})
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({message: "Internal server error'"})
+  });
+});
 
 router.post('/',jsonParser, (req, res) => {
   const requiredFields = ['title', 'content', 'author']
@@ -28,14 +46,28 @@ router.post('/',jsonParser, (req, res) => {
       return res.status(400).send(`Missing "${field}" in request body`)
     }
   }
-  const item = BlogPosts.create(req.body.title, req.body.content, req.body.author, req.body.publishDate)
-  res.status(201).json(item)
+  BlogPosts
+    .create({
+      title: req.body.title,
+      content: req.body.content,
+      author: {
+        firstName: req.body.author.firstName,
+        lastName: req.body.author.lastName,
+      date: req.body.date
+    })
+    .then(blog => {
+      blog.status(201).json(blog.serialize())
+    });
 });
 
 router.delete('/:id', (req, res) => {
-  BlogPosts.delete(req.params.id);
-  console.log(`Deleted blog post \`${req.params.ID}\``);
-  res.status(204).end();
+  BlogPosts
+  .findByIdAndRemove(req.params.id)
+  .then(blog => {res.status(204).end()})
+  .catch(err => {
+    console.log(err)
+    res.status(500).json({message: "Internal server error"})
+  });
 });
 
 router.put('/:id', jsonParser, (req, res) => {
@@ -56,14 +88,21 @@ router.put('/:id', jsonParser, (req, res) => {
   }
   // title, content, author, publishDate
   console.log(`Updating Blog Post "${req.params.id}"`);
-  const updatedItem = BlogPosts.update({
-    id: req.params.id,
-    title: req.body.title,
-    content: req.body.content,
-    author: req.body.author,
-    publishDate: req.body.publishDate || Date.now()
-  })
-  res.status(204).json(updatedItem);
+  blogPosts
+    .update({
+      id: req.params.id,
+      title: req.body.title,
+      content: req.body.content,
+      author: req.body.author,
+      date: req.body.date || Date.now()
+    })
+    .then(blog => {
+      blog.status(204).json(blog.serialize())
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({message: "Internal server error"})
+    })
 })
 
 module.exports = router;
