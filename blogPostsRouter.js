@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
+const mongoose = require('mongoose');
 
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 
 const blogPosts = require('./models');
 
-
+router.use(express.static('public'))
 
 // title, content, author, publishDate
 
@@ -53,6 +54,7 @@ router.post('/',jsonParser, (req, res) => {
       author: {
         firstName: req.body.author.firstName,
         lastName: req.body.author.lastName,
+      },
       date: req.body.date
     })
     .then(blog => {

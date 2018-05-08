@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 
-const schema = mongoose.schema({
+const schema = mongoose.Schema({
   title: {type: String, required: true},
   content: {type: String, required: true},
   date: {type: Date, default: Date.now},
